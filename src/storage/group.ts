@@ -1,7 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { v4 } from 'uuid'
+import toast from 'react-hot-toast'
 
-// Define the Group entity structure
 interface GroupEntity {
   id: string
   createdAt: string
@@ -22,14 +23,16 @@ export const useGroupStorage = create<GroupStore>()(
     (set, get) => ({
       groups: {},
       getGroup: key => get().groups[key],
-      deleteGroup: key =>
+      deleteGroup: key => {
         set(state => {
-          const { [key]: _, ...rest } = state.groups
-          return { groups: rest }
-        }),
+          const groups = state.groups
+          delete groups[key]
+          return { groups }
+        })
+        toast(`Group deleted`)
+      },
       createGroup: (name: string) => {
-        // TODO: add a uuidv4
-        const id = Math.random().toString(36).substr(2, 9)
+        const id = v4()
         const timestamp = new Date().toISOString()
 
         const newGroup: GroupEntity = {
@@ -45,8 +48,9 @@ export const useGroupStorage = create<GroupStore>()(
             [id]: newGroup
           }
         }))
+        toast.success(`Group "${name}" created`)
       },
-      editGroup: (key: string, name: string) =>
+      editGroup: (key: string, name: string) => {
         set(state => {
           const group = state.groups[key]
           if (group) {
@@ -64,6 +68,8 @@ export const useGroupStorage = create<GroupStore>()(
           }
           return state
         })
+        toast.success(`Group "${name}" edited`)
+      }
     }),
     {
       name: 'group-storage'
