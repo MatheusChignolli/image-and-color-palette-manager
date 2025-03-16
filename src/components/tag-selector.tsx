@@ -1,5 +1,7 @@
 'use client'
 
+import { MAX_TAGS } from '@/constants/limits'
+
 const TAG_COLORS = [
   'badge-primary',
   'badge-secondary',
@@ -27,7 +29,7 @@ function TagSelector({ form, field }: Props) {
     if (e.key === 'Enter' && tagName && !formTags.some(tag => tag.name === tagName)) {
       e.preventDefault()
 
-      if (formTags.length >= 5) {
+      if (formTags.length >= MAX_TAGS) {
         return
       }
 
@@ -35,7 +37,7 @@ function TagSelector({ form, field }: Props) {
 
       const updatedTags = [...formTags, newTag]
 
-      form.setFieldValue('tags', updatedTags, { dontUpdateMeta: true })
+      form.setFieldValue('tags', updatedTags)
       ;(e.target as HTMLInputElement).value = ''
     }
   }
@@ -51,14 +53,13 @@ function TagSelector({ form, field }: Props) {
       <input
         type="text"
         className="input"
-        // TODO: Use the maximum of 5 to add a paid plan
-        disabled={form.getFieldValue('tags').length >= 5}
+        disabled={form.getFieldValue('tags').length >= MAX_TAGS}
         placeholder="Enter tag and press Enter"
         id={field.name}
         name={field.name}
         onKeyDown={handleTagChange}
       />
-      <p className="fieldset-label">You can add 5 tags</p>
+      <p className="fieldset-label">You can add {MAX_TAGS} tags</p>
       {form.state.values.tags.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2">
           {form.state.values.tags.map((tag, index: number) => (

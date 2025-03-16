@@ -1,33 +1,31 @@
 'use client'
 
+import { MAX_GROUPS } from '@/constants/limits'
 import { useGroupStorage } from '@/storage/group'
 import { Settings } from 'lucide-react'
 
 interface Props {
   form: any
-  field: any
 }
 
-function GroupSelector({ form, field }: Props) {
+function GroupSelector({ form }: Props) {
   const { groups, getGroup } = useGroupStorage()
-  const groupsList = Object.values(groups)
+  const formGroups = form.state.values.groups
+  const groupsList = Object.values(groups).filter(group => !formGroups.includes(group.id))
 
-  const handleGroupChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleGroupChange = (e: any) => {
     const id = (e.target as HTMLInputElement).value.trim()
-    const formGroups = form.state.values.groups
 
-    if (e.key === 'Enter' && id && !formGroups.some((group: string) => group === id)) {
-      e.preventDefault()
-
-      if (formGroups.length >= 5) {
+    if (!formGroups.some((group: string) => group === id)) {
+      if (formGroups.length >= MAX_GROUPS) {
         return
       }
 
       const updatedGroups = [...formGroups, id]
 
-      form.setFieldValue('groups', updatedGroups, { dontUpdateMeta: true })
-      ;(e.target as HTMLInputElement).value = ''
+      form.setFieldValue('groups', updatedGroups)
     }
+    ;(e.target as HTMLInputElement).value = ''
   }
 
   const handleRemoveGroup = (id: string) => {
@@ -38,22 +36,14 @@ function GroupSelector({ form, field }: Props) {
   return (
     <fieldset className="fieldset">
       <legend className="fieldset-legend">Custom Groups</legend>
-      {/* <input
-        type="text"
-        className="input"
-        disabled={form.getFieldValue('groups').length >= 5}
-        placeholder="Enter group name and press Enter"
-        id={field.name}
-        name={field.name}
-        onKeyDown={handleGroupChange}
-      /> */}
       <div className="flex gap-2">
         <select
           defaultValue="Select a group"
           className="select"
-          disabled={!groupsList.length}
+          disabled={!groupsList.length || formGroups.length >= MAX_GROUPS}
+          onChange={handleGroupChange}
         >
-          <option disabled={true}>Select a group</option>
+          <option>Select a group</option>
           {groupsList.map(({ id, name }) => {
             return (
               <option key={id} value={id}>
@@ -73,7 +63,7 @@ function GroupSelector({ form, field }: Props) {
           Manage groups
         </button>
       </div>
-      <p className="fieldset-label">You can add 5 groups</p>
+      <p className="fieldset-label">You can add {MAX_GROUPS} groups</p>
       {form.state.values.groups.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2">
           {form.state.values.groups.map((id: string, index: number) => {
@@ -84,12 +74,15 @@ function GroupSelector({ form, field }: Props) {
             }
 
             return (
-              <span key={`${group.name}-${index}`} className="badge badge-sm">
+              <span
+                key={`${group.name}-${index}`}
+                className="badge badge-neutral badge-sm"
+              >
                 {group.name}
                 <button
                   type="button"
                   className="ml-1 cursor-pointer"
-                  onClick={() => handleRemoveGroup(group.name)}
+                  onClick={() => handleRemoveGroup(group.id)}
                 >
                   ✕
                 </button>

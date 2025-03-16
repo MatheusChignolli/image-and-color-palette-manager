@@ -83,9 +83,7 @@ function NewImage() {
         <form.Field name="tags">
           {field => <TagSelector form={form} field={field} />}
         </form.Field>
-        <form.Field name="groups">
-          {field => <GroupSelector form={form} field={field} />}
-        </form.Field>
+        <form.Field name="groups">{() => <GroupSelector form={form} />}</form.Field>
         <div className="flex gap-2 mt-4 w-full">
           <button type="submit" className="btn btn-primary flex-1">
             <Plus size={20} /> Create

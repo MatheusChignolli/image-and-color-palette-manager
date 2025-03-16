@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useForm } from '@tanstack/react-form'
-import { ArrowUpRight, Ban, Pencil, Save, Trash2 } from 'lucide-react'
+import { ArrowUpRight, Ban, Pencil, Save, Trash2, X } from 'lucide-react'
 import { useGroupStorage } from '@/storage/group'
 import FieldsetError from '@/app/_components/fieldset-error'
 
@@ -68,6 +68,7 @@ function GroupListItem({ id, name }: { id: string; name: string }) {
           )}
         </form.Field>
         <button
+          type="button"
           className="btn btn-sm btn-square btn-error"
           onClick={() => setIsEditing(false)}
         >
@@ -106,6 +107,7 @@ function CreateGroupModal() {
     },
     onSubmit: async ({ value }) => {
       createGroup(value.name)
+      resetForm()
     },
     validators: {
       onSubmit: ({ value }) => {
@@ -126,18 +128,16 @@ function CreateGroupModal() {
     }
   })
 
+  const resetForm = () => {
+    form.reset()
+  }
+
   return (
-    <dialog
-      onClose={() => {
-        form.reset()
-      }}
-      id="group-modal"
-      className="modal"
-    >
+    <dialog onClose={resetForm} id="group-modal" className="modal">
       <div className="modal-box">
         <form method="dialog">
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-            ✕
+            <X size={20} />
           </button>
         </form>
         <form
@@ -145,9 +145,7 @@ function CreateGroupModal() {
           onSubmit={e => {
             e.preventDefault()
             e.stopPropagation()
-            form.handleSubmit().finally(() => {
-              form.reset()
-            })
+            form.handleSubmit()
           }}
         >
           <h3 className="font-bold text-lg">Groups</h3>
