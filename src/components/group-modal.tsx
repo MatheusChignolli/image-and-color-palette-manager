@@ -5,6 +5,7 @@ import { useForm } from '@tanstack/react-form'
 import { ArrowUpRight, Ban, Pencil, Save, Trash2, X } from 'lucide-react'
 import { useGroupStorage } from '@/storage/group'
 import FieldsetError from '@/app/_components/fieldset-error'
+import limits from '@/constants/limits'
 
 function GroupListItem({ id, name }: { id: string; name: string }) {
   const [isEditing, setIsEditing] = useState(false)
@@ -20,10 +21,10 @@ function GroupListItem({ id, name }: { id: string; name: string }) {
     },
     validators: {
       onSubmit: ({ value }) => {
-        if (!!value.name && value.name.length > 25) {
+        if (!!value.name && value.name.length > limits.MAX_NAME_CHARACTERS) {
           return {
             fields: {
-              name: 'Max 25 characters'
+              name: `Max ${limits.MAX_NAME_CHARACTERS} characters`
             }
           }
         }
@@ -111,10 +112,10 @@ function CreateGroupModal() {
     },
     validators: {
       onSubmit: ({ value }) => {
-        if (!!value.name && value.name.length > 25) {
+        if (!!value.name && value.name.length > limits.MAX_NAME_CHARACTERS) {
           return {
             fields: {
-              name: 'Group name must be 25 characters or fewer'
+              name: `Group name must be ${limits.MAX_NAME_CHARACTERS} characters or fewer`
             }
           }
         }

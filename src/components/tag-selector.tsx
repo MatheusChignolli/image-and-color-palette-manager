@@ -1,6 +1,6 @@
 'use client'
 
-import { MAX_TAGS } from '@/constants/limits'
+import limits from '@/constants/limits'
 
 const TAG_COLORS = [
   'badge-primary',
@@ -29,7 +29,7 @@ function TagSelector({ form, field }: Props) {
     if (e.key === 'Enter' && tagName && !formTags.some(tag => tag.name === tagName)) {
       e.preventDefault()
 
-      if (formTags.length >= MAX_TAGS) {
+      if (formTags.length >= limits.MAX_TAGS) {
         return
       }
 
@@ -53,13 +53,13 @@ function TagSelector({ form, field }: Props) {
       <input
         type="text"
         className="input"
-        disabled={form.getFieldValue('tags').length >= MAX_TAGS}
+        disabled={form.getFieldValue('tags').length >= limits.MAX_TAGS}
         placeholder="Enter tag and press Enter"
         id={field.name}
         name={field.name}
         onKeyDown={handleTagChange}
       />
-      <p className="fieldset-label">You can add {MAX_TAGS} tags</p>
+      <p className="fieldset-label">You can add {limits.MAX_TAGS} tags</p>
       {form.state.values.tags.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2">
           {form.state.values.tags.map((tag, index: number) => (

@@ -3,12 +3,19 @@
 import FieldsetError from '@/app/_components/fieldset-error'
 import GroupSelector from '@/components/group-selector'
 import TagSelector from '@/components/tag-selector'
+import limits from '@/constants/limits'
+import paths from '@/constants/paths'
+import { useImageStorage } from '@/storage/image'
 import { useForm } from '@tanstack/react-form'
 import { Ban, Plus } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
 
 function NewImage() {
   const router = useRouter()
+  const [isPending, startTransition] = useTransition()
+  const { createImage } = useImageStorage()
+
   const form = useForm({
     defaultValues: {
       name: '',
@@ -17,10 +24,22 @@ function NewImage() {
       groups: []
     },
     onSubmit: async ({ value }) => {
-      console.log(value)
+      startTransition(() => {
+        createImage(value.name, value.content, value.tags, value.groups)
+        router.replace(paths.image)
+      })
     },
     validators: {
       onSubmit: ({ value }) => {
+        if (!!value.name && value.name.length > limits.MAX_NAME_CHARACTERS) {
+          return {
+            fields: {
+              name: `Image name must be ${limits.MAX_NAME_CHARACTERS} characters or fewer`,
+              content: !value.content ? 'Image URL is required' : undefined
+            }
+          }
+        }
+
         return {
           fields: {
             name: !value.name ? 'Image name is required' : undefined,
@@ -85,10 +104,24 @@ function NewImage() {
         </form.Field>
         <form.Field name="groups">{() => <GroupSelector form={form} />}</form.Field>
         <div className="flex gap-2 mt-4 w-full">
-          <button type="submit" className="btn btn-primary flex-1">
-            <Plus size={20} /> Create
+          <button disabled={isPending} type="submit" className="btn btn-primary flex-1">
+            {isPending ? (
+              <>
+                <span className="loading loading-dots loading-xs" />
+                Loading
+              </>
+            ) : (
+              <>
+                <Plus size={20} /> Create
+              </>
+            )}
           </button>
-          <button type="button" className="btn btn-error" onClick={() => router.back()}>
+          <button
+            disabled={isPending}
+            type="button"
+            className="btn btn-error"
+            onClick={() => router.back()}
+          >
             <Ban size={20} />
             Cancel
           </button>

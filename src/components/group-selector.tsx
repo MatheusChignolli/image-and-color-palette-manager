@@ -1,6 +1,6 @@
 'use client'
 
-import { MAX_GROUPS } from '@/constants/limits'
+import limits from '@/constants/limits'
 import { useGroupStorage } from '@/storage/group'
 import { Settings } from 'lucide-react'
 
@@ -17,7 +17,7 @@ function GroupSelector({ form }: Props) {
     const id = (e.target as HTMLInputElement).value.trim()
 
     if (!formGroups.some((group: string) => group === id)) {
-      if (formGroups.length >= MAX_GROUPS) {
+      if (formGroups.length >= limits.MAX_GROUPS) {
         return
       }
 
@@ -40,7 +40,7 @@ function GroupSelector({ form }: Props) {
         <select
           defaultValue="Select a group"
           className="select"
-          disabled={!groupsList.length || formGroups.length >= MAX_GROUPS}
+          disabled={!groupsList.length || formGroups.length >= limits.MAX_GROUPS}
           onChange={handleGroupChange}
         >
           <option>Select a group</option>
@@ -63,7 +63,7 @@ function GroupSelector({ form }: Props) {
           Manage groups
         </button>
       </div>
-      <p className="fieldset-label">You can add {MAX_GROUPS} groups</p>
+      <p className="fieldset-label">You can add {limits.MAX_GROUPS} groups</p>
       {form.state.values.groups.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2">
           {form.state.values.groups.map((id: string, index: number) => {
