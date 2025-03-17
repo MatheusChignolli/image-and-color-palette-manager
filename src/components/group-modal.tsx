@@ -3,13 +3,13 @@
 import { useState } from 'react'
 import { useForm } from '@tanstack/react-form'
 import { ArrowUpRight, Ban, Pencil, Save, Trash2, X } from 'lucide-react'
-import { useGroupStorage } from '@/storage/group'
+import { useGroupsStorage } from '@/storage/groups'
 import FieldsetError from '@/app/_components/fieldset-error'
 import limits from '@/constants/limits'
 
 function GroupListItem({ id, name }: { id: string; name: string }) {
   const [isEditing, setIsEditing] = useState(false)
-  const { deleteGroup, editGroup } = useGroupStorage()
+  const { deleteGroup, editGroup } = useGroupsStorage()
 
   const form = useForm({
     defaultValues: {
@@ -99,7 +99,7 @@ function GroupListItem({ id, name }: { id: string; name: string }) {
 }
 
 function CreateGroupModal() {
-  const { groups, createGroup } = useGroupStorage()
+  const { groups, createGroup } = useGroupsStorage()
   const groupsList = Object.values(groups)
 
   const form = useForm({
