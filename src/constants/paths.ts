@@ -1,7 +1,7 @@
 const paths = {
   home: '/',
-  image: '/image',
-  imageNew: '/image/new',
+  images: '/images',
+  imageNew: '/images/new',
   colorPalette: '/color-palette'
 }
 
