@@ -1,7 +1,7 @@
 'use client'
 
 import limits from '@/constants/limits'
-import { useGroupStorage } from '@/storage/group'
+import { useGroupsStorage } from '@/storage/groups'
 import { Settings } from 'lucide-react'
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 function GroupSelector({ form }: Props) {
-  const { groups, getGroup } = useGroupStorage()
+  const { groups, getGroup } = useGroupsStorage()
   const formGroups = form.state.values.groups
   const groupsList = Object.values(groups).filter(group => !formGroups.includes(group.id))
 
