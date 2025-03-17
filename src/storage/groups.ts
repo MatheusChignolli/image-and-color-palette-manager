@@ -18,7 +18,7 @@ interface GroupStore {
   editGroup: (key: string, name: string) => void
 }
 
-export const useGroupStorage = create<GroupStore>()(
+export const useGroupsStorage = create<GroupStore>()(
   persist(
     (set, get) => ({
       groups: {},
