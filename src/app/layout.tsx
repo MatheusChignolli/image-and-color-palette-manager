@@ -5,6 +5,7 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import CreateGroupModal from '@/components/group-modal'
 import { Toaster } from 'react-hot-toast'
+import CreateTagModal from '@/components/tag-modal'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,6 +36,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <CreateGroupModal />
+        <CreateTagModal />
         <Toaster
           position="top-center"
           reverseOrder={false}
