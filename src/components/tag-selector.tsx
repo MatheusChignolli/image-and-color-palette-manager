@@ -1,79 +1,94 @@
 'use client'
 
+import defaultValues from '@/constants/defaults'
 import limits from '@/constants/limits'
-
-const TAG_COLORS = [
-  'badge-primary',
-  'badge-secondary',
-  'badge-accent',
-  'badge-neutral',
-  'badge-info',
-  'badge-success',
-  'badge-warning',
-  'badge-error',
-  'badge-primary'
-]
-
-const getRandomColor = () => TAG_COLORS[Math.floor(Math.random() * TAG_COLORS.length)]
+import { useTagsStorage } from '@/storage/tags'
+import { Settings } from 'lucide-react'
 
 interface Props {
   form: any
-  field: any
 }
 
-function TagSelector({ form, field }: Props) {
-  const handleTagChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const tagName = (e.target as HTMLInputElement).value.trim()
-    const formTags = form.state.values.tags
+function TagSelector({ form }: Props) {
+  const { tags, getTag } = useTagsStorage()
+  const formTags = form.state.values.tags
+  const tagsList = Object.values(tags).filter(tag => !formTags.includes(tag.id))
 
-    if (e.key === 'Enter' && tagName && !formTags.some(tag => tag.name === tagName)) {
-      e.preventDefault()
+  const handleTagChange = (e: any) => {
+    const id = (e.target as HTMLInputElement).value.trim()
 
+    if (!formTags.some((tag: string) => tag === id)) {
       if (formTags.length >= limits.MAX_TAGS) {
         return
       }
 
-      const newTag = { name: tagName, color: getRandomColor() }
-
-      const updatedTags = [...formTags, newTag]
+      const updatedTags = [...formTags, id]
 
       form.setFieldValue('tags', updatedTags)
-      ;(e.target as HTMLInputElement).value = ''
     }
+    ;(e.target as HTMLInputElement).value = ''
   }
 
-  const handleRemoveTag = (tagName: string) => {
-    const updatedTags = form.state.values.tags.filter(tag => tag.name !== tagName)
+  const handleRemoveTag = (id: string) => {
+    const updatedTags = form.state.values.tags.filter((tag: string) => tag !== id)
     form.setFieldValue('tags', updatedTags)
   }
 
   return (
     <fieldset className="fieldset">
-      <legend className="fieldset-legend">Custom tags</legend>
-      <input
-        type="text"
-        className="input"
-        disabled={form.getFieldValue('tags').length >= limits.MAX_TAGS}
-        placeholder="Enter tag and press Enter"
-        id={field.name}
-        name={field.name}
-        onKeyDown={handleTagChange}
-      />
+      <legend className="fieldset-legend">Custom Tags</legend>
+      <div className="flex gap-2">
+        <select
+          defaultValue="Select a tag"
+          className="select"
+          disabled={!tagsList.length || formTags.length >= limits.MAX_TAGS}
+          onChange={handleTagChange}
+        >
+          <option>Select a tag</option>
+          {tagsList.map(({ id, name }) => {
+            return (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            )
+          })}
+        </select>
+        <button
+          type="button"
+          className="btn"
+          onClick={() =>
+            (document.getElementById('tag-modal') as HTMLDialogElement)?.showModal()
+          }
+        >
+          <Settings size={20} />
+          Manage tags
+        </button>
+      </div>
       <p className="fieldset-label">You can add {limits.MAX_TAGS} tags</p>
       {form.state.values.tags.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2">
-          {form.state.values.tags.map((tag, index: number) => (
-            <span key={`${tag.name}-${index}`} className={`badge badge-sm ${tag.color}`}>
-              {tag.name}
-              <button
-                type="button"
-                className="ml-1 cursor-pointer"
-                onClick={() => handleRemoveTag(tag.name)}
-              >
-                ✕
-              </button>
-            </span>
-          ))}
+          {form.state.values.tags.map((id: string, index: number) => {
+            const tag = getTag(id)
+
+            if (!tag) {
+              return null
+            }
+
+            const tagColor = tag.color || defaultValues.DEFAULT_TAG_COLOR
+
+            return (
+              <span key={`${tag.name}-${index}`} className={`badge badge-sm ${tagColor}`}>
+                {tag.name}
+                <button
+                  type="button"
+                  className="ml-1 cursor-pointer"
+                  onClick={() => handleRemoveTag(tag.id)}
+                >
+                  ✕
+                </button>
+              </span>
+            )
+          })}
         </div>
       )}
     </fieldset>

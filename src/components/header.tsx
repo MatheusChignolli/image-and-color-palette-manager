@@ -8,7 +8,9 @@
  */
 
 import paths from '@/constants/paths'
+import { Box, Settings2 } from 'lucide-react'
 import Link from 'next/link'
+import OpenModalButton from './open-modal-button'
 
 function Header() {
   return (
@@ -31,21 +33,41 @@ function Header() {
               />
             </svg>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <Link href={paths.image} prefetch={false}>
-                Image
-              </Link>
-            </li>
-            <li>
-              <Link href={paths.colorPalette} prefetch={false}>
-                Color palette
-              </Link>
-            </li>
-          </ul>
+          <div className="dropdown-content bg-base-200 border border-white/30 rounded-box z-1 mt-3 w-52 shadow-md">
+            <div className="flex flex-col p-2">
+              <p className="text-lg flex gap-1 items-center">
+                <Box size={20} />
+                Modules
+              </p>
+              <ul tabIndex={0} className="menu menu-sm w-full">
+                <li>
+                  <Link className="text-sm" href={paths.images} prefetch={false}>
+                    Images
+                  </Link>
+                </li>
+                <li>
+                  <Link className="text-sm" href={paths.colorPalette} prefetch={false}>
+                    Color palette
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="w-full border border-white/30" />
+            <div className="flex flex-col p-2">
+              <p className="text-lg flex gap-1 items-center">
+                <Settings2 size={20} />
+                Settings
+              </p>
+              <ul tabIndex={0} className="menu menu-sm w-full">
+                <li>
+                  <OpenModalButton id="tag-modal">Tags</OpenModalButton>
+                </li>
+                <li>
+                  <OpenModalButton id="group-modal">Groups</OpenModalButton>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <div className="navbar-center">
