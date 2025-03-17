@@ -3,11 +3,6 @@ import { persist } from 'zustand/middleware'
 import { v4 } from 'uuid'
 import toast from 'react-hot-toast'
 
-interface Tag {
-  name: string
-  color: string
-}
-
 interface Comment {
   id: string
   createdAt: string
@@ -20,7 +15,7 @@ interface ImageEntity {
   createdAt: string
   updatedAt: string
   name: string
-  tags: Tag[]
+  tags: string[]
   groups: string[]
   content: string
   comments: Comment[]
@@ -30,19 +25,19 @@ interface ImageStore {
   images: Record<string, ImageEntity>
   getImage: (key: string) => ImageEntity | undefined
   deleteImage: (key: string) => void
-  createImage: (name: string, content: string, tags?: Tag[], groups?: string[]) => void
+  createImage: (name: string, content: string, tags?: string[], groups?: string[]) => void
   editImage: (
     key: string,
     name: string,
     content?: string,
-    tags?: Tag[],
+    tags?: string[],
     groups?: string[]
   ) => void
   addComment: (imageId: string, content: string) => void
   deleteComment: (imageId: string, commentId: string) => void
 }
 
-export const useImageStorage = create<ImageStore>()(
+export const useImagesStorage = create<ImageStore>()(
   persist(
     (set, get) => ({
       images: {},
