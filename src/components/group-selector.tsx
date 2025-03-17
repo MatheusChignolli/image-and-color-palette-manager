@@ -76,7 +76,7 @@ function GroupSelector({ form }: Props) {
             return (
               <span
                 key={`${group.name}-${index}`}
-                className="badge badge-neutral badge-sm"
+                className="badge badge-outline badge-sm"
               >
                 {group.name}
                 <button

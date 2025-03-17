@@ -1,3 +1,5 @@
+import Images from './_components/images'
+
 export const metadata = {
   title: 'Image Organizer - Smart Image Management',
   description:
@@ -5,7 +7,11 @@ export const metadata = {
 }
 
 function ImageModule() {
-  return <div className="">Image</div>
+  return (
+    <div className="flex flex-col gap-4">
+      <Images />
+    </div>
+  )
 }
 
 export default ImageModule
