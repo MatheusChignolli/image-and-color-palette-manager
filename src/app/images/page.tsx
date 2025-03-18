@@ -1,4 +1,4 @@
-import Filters from './_components/filters'
+import Filters from '@/components/filters'
 import Images from './_components/images'
 
 export const metadata = {

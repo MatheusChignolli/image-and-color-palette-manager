@@ -99,9 +99,7 @@ function NewImage() {
             </fieldset>
           )}
         </form.Field>
-        <form.Field name="tags">
-          {field => <TagSelector form={form} field={field} />}
-        </form.Field>
+        <form.Field name="tags">{() => <TagSelector form={form} />}</form.Field>
         <form.Field name="groups">{() => <GroupSelector form={form} />}</form.Field>
         <div className="flex gap-2 mt-4 w-full">
           <button disabled={isPending} type="submit" className="btn btn-primary flex-1">

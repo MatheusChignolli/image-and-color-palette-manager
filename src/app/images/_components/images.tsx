@@ -6,17 +6,46 @@ import { useGroupsStorage } from '@/storage/groups'
 import { useImagesStorage } from '@/storage/images'
 import { useTagsStorage } from '@/storage/tags'
 import { Clipboard } from 'lucide-react'
+import { useSearchParams } from 'next/navigation'
 import toast from 'react-hot-toast'
 
 function Images() {
+  const searchParams = useSearchParams()
   const { images } = useImagesStorage()
   const { getGroup } = useGroupsStorage()
   const { getTag } = useTagsStorage()
-  const imagesList = Object.values(images)
+
+  const query = searchParams.get('query')
+  const group = searchParams.get('group')
+  const tag = searchParams.get('tag')
+
+  const isLoading = Object.keys(images).length === 0
+  const imagesList = Object.values(images).filter(image => {
+    const matchesQuery = query
+      ? image.name.toLowerCase().includes(query.toLowerCase())
+      : true
+    const matchesGroup = group ? image.groups?.includes(group) : true
+    const matchesTag = tag ? image.tags?.includes(tag) : true
+
+    return matchesQuery && matchesGroup && matchesTag
+  })
 
   const copyUrlToClipboard = (url: string) => {
     window.navigator.clipboard.writeText(url)
     toast.success('Image URL copied')
+  }
+
+  if (isLoading) {
+    return (
+      <p className="text-2xl flex justify-center p-10 align-center">
+        Loading
+        <span className="loading loading-dots loading-lg mt-2" />
+      </p>
+    )
+  }
+
+  if (!imagesList.length) {
+    return <p className="text-2xl flex justify-center p-10">No images found</p>
   }
 
   return (
