@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { SquareArrowOutUpRight, X } from 'lucide-react'
 import ImageWithFallback from './image-with-fallback'
 
@@ -9,9 +8,9 @@ interface Props {
   src?: string
 }
 
-function ImageInspectorModal({ className, src }: Props) {
-  const [isOpen, setIsOpen] = useState(false)
+const modalId = 'image-inspector-modal'
 
+function ImageInspectorModal({ className, src }: Props) {
   if (!src) return null
 
   return (
@@ -20,32 +19,33 @@ function ImageInspectorModal({ className, src }: Props) {
         <button
           type="button"
           className={`btn btn-primary btn-square ${className}`}
-          onClick={() => setIsOpen(true)}
+          onClick={() =>
+            (document.getElementById(modalId) as HTMLDialogElement)?.showModal()
+          }
         >
           <SquareArrowOutUpRight size={20} />
         </button>
       </div>
-
-      {isOpen && (
-        <div className="modal modal-open">
-          <div className="modal-box p-10 relative">
-            <button
-              type="button"
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              onClick={() => setIsOpen(false)}
-            >
-              <X size={20} />
-            </button>
-            <ImageWithFallback
-              width={432}
-              height={300}
-              src={src}
-              alt="Inspected"
-              className="w-full h-auto object-contain rounded-lg"
-            />
-          </div>
+      <dialog id={modalId} className="modal">
+        <div className="p-10 relative">
+          <button
+            type="button"
+            className="btn btn-sm btn-circle btn-primary absolute right-2 top-2"
+            onClick={() =>
+              (document.getElementById(modalId) as HTMLDialogElement)?.close()
+            }
+          >
+            <X size={20} />
+          </button>
+          <ImageWithFallback
+            width={600}
+            height={400}
+            src={src}
+            alt="Inspected"
+            className="w-full h-auto object-contain rounded-lg"
+          />
         </div>
-      )}
+      </dialog>
     </>
   )
 }

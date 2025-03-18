@@ -43,17 +43,15 @@ function ImageWithFallback({
       }}
       className="flex"
     >
-      {!isBackground && (
-        <Image
-          {...props}
-          src={src}
-          alt={alt || 'Image'}
-          width={width}
-          height={height}
-          onError={() => setIsValid(false)}
-          className="m-auto w-auto h-auto"
-        />
-      )}
+      <Image
+        {...props}
+        src={src}
+        alt={alt || 'Image'}
+        width={width}
+        height={height}
+        onError={() => setIsValid(false)}
+        className={`m-auto w-auto h-auto ${isBackground ? 'opacity-0' : 'opacity-100'}`}
+      />
     </div>
   ) : (
     <div

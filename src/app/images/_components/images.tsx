@@ -73,7 +73,7 @@ function Images() {
             </button>
           </div>
           <Link href={paths.image(id)} prefetch={false}>
-            <div className="card bg-base-200 w-full shadow-md relative">
+            <div className="card bg-base-200 w-full shadow-md relative h-full">
               <figure className="bg-gray-900">
                 <ImageWithFallback isBackground src={content} alt={`Image: ${name}`} />
               </figure>
