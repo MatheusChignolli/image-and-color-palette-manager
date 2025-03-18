@@ -16,7 +16,7 @@ interface Props {
   id?: string
 }
 
-function TagForm({ id }: Props) {
+function ImageForm({ id }: Props) {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const { createImage, getImage, editImage } = useImagesStorage()
@@ -146,4 +146,4 @@ function TagForm({ id }: Props) {
   )
 }
 
-export default TagForm
+export default ImageForm

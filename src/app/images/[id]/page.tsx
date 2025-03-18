@@ -1,4 +1,4 @@
-import TagForm from '@/components/tag-form'
+import ImageForm from '@/components/image-form'
 import DangerZone from '../_components/danger-zone'
 
 interface Props {
@@ -11,7 +11,7 @@ async function ImagePage({ params }: Props) {
   return (
     <div className="max-w-xl mx-auto">
       <h1 className="text-3xl font-bold">Edit image</h1>
-      <TagForm id={id} />
+      <ImageForm id={id} />
       <DangerZone id={id} />
     </div>
   )

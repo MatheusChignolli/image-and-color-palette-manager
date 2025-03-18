@@ -1,112 +1,11 @@
 'use client'
 
-import { useState } from 'react'
 import { useForm } from '@tanstack/react-form'
-import { ArrowUpRight, Ban, Pencil, Save, Trash2, X } from 'lucide-react'
+import { ArrowUpRight, X } from 'lucide-react'
 import { useGroupsStorage } from '@/storage/groups'
 import FieldsetError from '@/app/_components/fieldset-error'
 import limits from '@/constants/limits'
-import { useImagesStorage } from '@/storage/images'
-
-function GroupListItem({ id, name }: { id: string; name: string }) {
-  const [isEditing, setIsEditing] = useState(false)
-  const { deleteGroup, editGroup } = useGroupsStorage()
-  const { removeGroupFromImages } = useImagesStorage()
-
-  const handleDeleteGroup = (id: string) => {
-    deleteGroup(id)
-    removeGroupFromImages(id)
-  }
-
-  const form = useForm({
-    defaultValues: {
-      name
-    },
-    onSubmit: async ({ value }) => {
-      editGroup(id, value.name)
-      setIsEditing(false)
-    },
-    validators: {
-      onSubmit: ({ value }) => {
-        if (!!value.name && value.name.length > limits.MAX_NAME_CHARACTERS) {
-          return {
-            fields: {
-              name: `Max ${limits.MAX_NAME_CHARACTERS} characters`
-            }
-          }
-        }
-
-        return {
-          fields: {
-            name: !value.name ? 'Group name is required' : undefined
-          }
-        }
-      }
-    }
-  })
-
-  if (isEditing) {
-    return (
-      <form
-        id={`edit-group-form-${id}`}
-        onSubmit={e => {
-          e.preventDefault()
-          e.stopPropagation()
-          form.handleSubmit()
-        }}
-        className="flex items-center gap-2"
-      >
-        <form.Field name="name">
-          {field => (
-            <>
-              <input
-                autoFocus
-                type="text"
-                className="input text-sm font-semibold flex-1"
-                placeholder="Summer book"
-                id={field.name}
-                name={field.name}
-                value={field.state.value}
-                onChange={e => field.handleChange(e.target.value)}
-              />
-              {field.state.meta.errors ? (
-                <FieldsetError>{field.state.meta.errors.join(', ')}</FieldsetError>
-              ) : null}
-            </>
-          )}
-        </form.Field>
-        <button
-          type="button"
-          className="btn btn-sm btn-square btn-error"
-          onClick={() => setIsEditing(false)}
-        >
-          <Ban size={20} />
-        </button>
-        <button type="submit" className="btn btn-sm btn-square btn-primary">
-          <Save size={20} />
-        </button>
-      </form>
-    )
-  }
-
-  return (
-    <div key={`groups-list-${id}`} className="flex items-center">
-      <div className="text-sm font-semibold flex-1">{name}</div>
-      <button
-        className="btn btn-sm btn-square btn-error"
-        onClick={() => handleDeleteGroup(id)}
-      >
-        <Trash2 size={20} />
-      </button>
-      <button
-        className="btn btn-sm btn-square btn-primary ml-2"
-        onClick={() => setIsEditing(true)}
-      >
-        <Pencil size={20} />
-      </button>
-    </div>
-  )
-}
+import GroupListItem from './group-list-item'
 
 function CreateGroupModal() {
   const { groups, createGroup } = useGroupsStorage()
