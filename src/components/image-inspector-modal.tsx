@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { SquareArrowOutUpRight, X } from 'lucide-react'
-import Image from 'next/image'
+import ImageWithFallback from './image-with-fallback'
 
 interface Props {
   className?: string
@@ -36,9 +36,9 @@ function ImageInspectorModal({ className, src }: Props) {
             >
               <X size={20} />
             </button>
-            <Image
-              width={500}
-              height={500}
+            <ImageWithFallback
+              width={432}
+              height={300}
               src={src}
               alt="Inspected"
               className="w-full h-auto object-contain rounded-lg"
