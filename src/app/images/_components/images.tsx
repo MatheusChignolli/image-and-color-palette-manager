@@ -6,11 +6,11 @@ import paths from '@/constants/paths'
 import { useGroupsStorage } from '@/storage/groups'
 import { useImagesStorage } from '@/storage/images'
 import { useTagsStorage } from '@/storage/tags'
-import { Clipboard } from 'lucide-react'
+import shareUtils from '@/utils/share'
+import { Clipboard, Share } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
 
 function Images() {
   const searchParams = useSearchParams()
@@ -32,11 +32,6 @@ function Images() {
 
     return matchesQuery && matchesGroup && matchesTag
   })
-
-  const copyUrlToClipboard = (url: string) => {
-    window.navigator.clipboard.writeText(url)
-    toast.success('Image URL copied')
-  }
 
   useEffect(() => {
     if (Object.keys(images).length >= 0) {
@@ -61,13 +56,19 @@ function Images() {
     <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {imagesList.map(({ id, name, content, updatedAt, tags, groups }) => (
         <div key={id} className="relative">
-          <div
-            className="tooltip tooltip-primary absolute top-2 right-2 z-10"
-            data-tip="Copy image URL"
-          >
+          <div className="absolute top-2 right-2 z-10 flex gap-2">
             <button
-              onClick={() => copyUrlToClipboard(content)}
-              className="btn btn-square btn-primary"
+              onClick={() => shareUtils.shareUrl(content)}
+              className="btn btn-square btn-primary tooltip tooltip-primary"
+              data-tip="Share image URL"
+            >
+              <Share size={20} />
+            </button>
+
+            <button
+              onClick={() => shareUtils.copyToClipboard(content)}
+              className="btn btn-square btn-primary tooltip tooltip-primary"
+              data-tip="Copy image URL"
             >
               <Clipboard size={20} />
             </button>
