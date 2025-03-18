@@ -35,6 +35,8 @@ interface ImageStore {
   ) => void
   addComment: (imageId: string, content: string) => void
   deleteComment: (imageId: string, commentId: string) => void
+  removeGroupFromImages: (groupId: string) => void
+  removeTagFromImages: (tagId: string) => void
 }
 
 export const useImagesStorage = create<ImageStore>()(
@@ -139,6 +141,44 @@ export const useImagesStorage = create<ImageStore>()(
           return state
         })
         toast(`Comment deleted`)
+      },
+      removeGroupFromImages: (groupId: string) => {
+        set(state => {
+          const updatedImages = Object.keys(state.images).reduce(
+            (acc, key) => {
+              const image = state.images[key]
+              acc[key] = {
+                ...image,
+                groups: image.groups.filter(g => g !== groupId),
+                updatedAt: new Date().toISOString()
+              }
+              return acc
+            },
+            {} as Record<string, ImageEntity>
+          )
+
+          return { images: updatedImages }
+        })
+        toast.success(`Group removed from images`)
+      },
+      removeTagFromImages: (tag: string) => {
+        set(state => {
+          const updatedImages = Object.keys(state.images).reduce(
+            (acc, key) => {
+              const image = state.images[key]
+              acc[key] = {
+                ...image,
+                tags: image.tags.filter(t => t !== tag),
+                updatedAt: new Date().toISOString()
+              }
+              return acc
+            },
+            {} as Record<string, ImageEntity>
+          )
+
+          return { images: updatedImages }
+        })
+        toast.success(`Tag removed from images`)
       }
     }),
     {

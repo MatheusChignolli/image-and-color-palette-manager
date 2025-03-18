@@ -51,8 +51,7 @@ function ImageWithFallback({
           width={width}
           height={height}
           onError={() => setIsValid(false)}
-          className="m-auto"
-          style={{ width: 'auto', height: 'auto' }}
+          className="m-auto w-auto h-auto"
         />
       )}
     </div>

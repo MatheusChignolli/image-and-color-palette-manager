@@ -2,6 +2,7 @@
 
 import FieldsetError from '@/app/_components/fieldset-error'
 import GroupSelector from '@/components/group-selector'
+import ImageInspectorModal from '@/components/image-inspector-modal'
 import TagSelector from '@/components/tag-selector'
 import limits from '@/constants/limits'
 import paths from '@/constants/paths'
@@ -60,7 +61,7 @@ function NewImage() {
           form.handleSubmit()
         }}
       >
-        <h1 className="text-3xl font-bold">New image content</h1>
+        <h1 className="text-3xl font-bold">New image</h1>
         <form.Field name="name">
           {field => (
             <fieldset className="fieldset">
@@ -82,17 +83,20 @@ function NewImage() {
         </form.Field>
         <form.Field name="content">
           {field => (
-            <fieldset className="fieldset">
+            <fieldset className="fieldset relative">
               <legend className="fieldset-legend">Insert your image URL below</legend>
-              <input
-                type="text"
-                className="input"
-                placeholder="https://your-image-url.com"
-                id={field.name}
-                name={field.name}
-                value={field.state.value}
-                onChange={e => field.handleChange(e.target.value)}
-              />
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  className="input"
+                  placeholder="https://your-image-url.com"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onChange={e => field.handleChange(e.target.value)}
+                />
+                <ImageInspectorModal src={field.state.value} />
+              </div>
               {field.state.meta.errors ? (
                 <FieldsetError>{field.state.meta.errors.join(', ')}</FieldsetError>
               ) : null}

@@ -6,10 +6,17 @@ import { ArrowUpRight, Ban, Pencil, Save, Trash2, X } from 'lucide-react'
 import { useGroupsStorage } from '@/storage/groups'
 import FieldsetError from '@/app/_components/fieldset-error'
 import limits from '@/constants/limits'
+import { useImagesStorage } from '@/storage/images'
 
 function GroupListItem({ id, name }: { id: string; name: string }) {
   const [isEditing, setIsEditing] = useState(false)
   const { deleteGroup, editGroup } = useGroupsStorage()
+  const { removeGroupFromImages } = useImagesStorage()
+
+  const handleDeleteGroup = (id: string) => {
+    deleteGroup(id)
+    removeGroupFromImages(id)
+  }
 
   const form = useForm({
     defaultValues: {
@@ -85,7 +92,10 @@ function GroupListItem({ id, name }: { id: string; name: string }) {
   return (
     <div key={`groups-list-${id}`} className="flex items-center">
       <div className="text-sm font-semibold flex-1">{name}</div>
-      <button className="btn btn-sm btn-square btn-error" onClick={() => deleteGroup(id)}>
+      <button
+        className="btn btn-sm btn-square btn-error"
+        onClick={() => handleDeleteGroup(id)}
+      >
         <Trash2 size={20} />
       </button>
       <button

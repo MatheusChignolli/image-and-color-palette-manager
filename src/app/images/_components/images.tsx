@@ -7,6 +7,7 @@ import { useImagesStorage } from '@/storage/images'
 import { useTagsStorage } from '@/storage/tags'
 import { Clipboard } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 function Images() {
@@ -14,12 +15,12 @@ function Images() {
   const { images } = useImagesStorage()
   const { getGroup } = useGroupsStorage()
   const { getTag } = useTagsStorage()
+  const [isFetching, setIsFetching] = useState(true)
 
   const query = searchParams.get('query')
   const group = searchParams.get('group')
   const tag = searchParams.get('tag')
 
-  const isLoading = Object.keys(images).length === 0
   const imagesList = Object.values(images).filter(image => {
     const matchesQuery = query
       ? image.name.toLowerCase().includes(query.toLowerCase())
@@ -35,7 +36,13 @@ function Images() {
     toast.success('Image URL copied')
   }
 
-  if (isLoading) {
+  useEffect(() => {
+    if (Object.keys(images).length >= 0) {
+      setIsFetching(false)
+    }
+  }, [images])
+
+  if (isFetching) {
     return (
       <p className="text-2xl flex justify-center p-10 align-center">
         Loading
@@ -49,7 +56,7 @@ function Images() {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {imagesList.map(({ id, name, content, updatedAt, tags, groups }) => (
         <div key={id} className="card bg-base-200 w-full shadow-md relative">
           <div
@@ -71,7 +78,7 @@ function Images() {
               {name}
               {tags.map((tagId, index: number) => {
                 const tag = getTag(tagId)
-                const tagColor = tag.color || defaultValues.DEFAULT_TAG_COLOR
+                const tagColor = tag?.color || defaultValues.DEFAULT_TAG_COLOR
 
                 return (
                   <span

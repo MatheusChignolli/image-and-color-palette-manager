@@ -7,10 +7,17 @@ import FieldsetError from '@/app/_components/fieldset-error'
 import limits from '@/constants/limits'
 import { useTagsStorage } from '@/storage/tags'
 import tagsUtils from '@/utils/tags'
+import { useImagesStorage } from '@/storage/images'
 
-function ImageListItem({ id, name, color }: { id: string; name: string; color: string }) {
+function TagListItem({ id, name, color }: { id: string; name: string; color: string }) {
   const [isEditing, setIsEditing] = useState(false)
   const { deleteTag, editTag } = useTagsStorage()
+  const { removeTagFromImages } = useImagesStorage()
+
+  const handleDeleteTag = (id: string) => {
+    deleteTag(id)
+    removeTagFromImages(id)
+  }
 
   const form = useForm({
     defaultValues: {
@@ -87,7 +94,10 @@ function ImageListItem({ id, name, color }: { id: string; name: string; color: s
     <div key={`tags-list-${id}`} className="flex items-center">
       <span className={`badge badge-sm ${color} mr-2`} />
       <div className="text-sm font-semibold flex-1">{name}</div>
-      <button className="btn btn-sm btn-square btn-error" onClick={() => deleteTag(id)}>
+      <button
+        className="btn btn-sm btn-square btn-error"
+        onClick={() => handleDeleteTag(id)}
+      >
         <Trash2 size={20} />
       </button>
       <button
@@ -100,7 +110,7 @@ function ImageListItem({ id, name, color }: { id: string; name: string; color: s
   )
 }
 
-function CreateImageModal() {
+function CreateTagModal() {
   const { tags, createTag } = useTagsStorage()
   const tagsList = Object.values(tags)
 
@@ -184,7 +194,7 @@ function CreateImageModal() {
             <div className="flex flex-col max-h-[300px] overflow-auto p-4 rounded-md gap-2 bg-base-300">
               {tagsList.map(({ id, name, color }) => {
                 return (
-                  <ImageListItem
+                  <TagListItem
                     key={`tags-list-${id}`}
                     id={id}
                     name={name}
@@ -205,4 +215,4 @@ function CreateImageModal() {
   )
 }
 
-export default CreateImageModal
+export default CreateTagModal

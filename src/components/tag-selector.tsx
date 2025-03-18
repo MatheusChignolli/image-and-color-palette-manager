@@ -74,7 +74,7 @@ function TagSelector({ form }: Props) {
               return null
             }
 
-            const tagColor = tag.color || defaultValues.DEFAULT_TAG_COLOR
+            const tagColor = tag?.color || defaultValues.DEFAULT_TAG_COLOR
 
             return (
               <span key={`${tag.name}-${index}`} className={`badge badge-sm ${tagColor}`}>

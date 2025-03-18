@@ -1,5 +1,6 @@
 'use client'
 
+import { useTransition } from 'react'
 import paths from '@/constants/paths'
 import { useGroupsStorage } from '@/storage/groups'
 import { useTagsStorage } from '@/storage/tags'
@@ -7,7 +8,6 @@ import { useForm } from '@tanstack/react-form'
 import { Plus, Search } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useTransition } from 'react'
 
 function Filters() {
   const searchParams = useSearchParams()
@@ -21,21 +21,18 @@ function Filters() {
   const tag = searchParams.get('tag')
   const group = searchParams.get('group')
 
-  const createQueryString = useCallback(
-    (values: { name: string; value: string }[]) => {
-      if (!values.length) {
-        return ''
-      }
+  const createQueryString = (values: { name: string; value: string }[]) => {
+    if (!values.length) {
+      return ''
+    }
 
-      const params = new URLSearchParams(searchParams.toString())
-      values.forEach(({ name, value }) => {
-        params.set(name, value)
-      })
+    const params = new URLSearchParams()
+    values.forEach(({ name, value }) => {
+      params.set(name, value)
+    })
 
-      return params.toString()
-    },
-    [searchParams]
-  )
+    return params.toString()
+  }
 
   const form = useForm({
     defaultValues: {
@@ -86,6 +83,7 @@ function Filters() {
           <label className="select">
             <span className="label">Group</span>
             <select
+              disabled={!groupsList.length}
               id={field.name}
               name={field.name}
               value={field.state.value}
@@ -108,6 +106,7 @@ function Filters() {
           <label className="select">
             <span className="label">Tag</span>
             <select
+              disabled={!tagsList.length}
               id={field.name}
               name={field.name}
               value={field.state.value}
