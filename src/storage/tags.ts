@@ -3,17 +3,11 @@ import { persist } from 'zustand/middleware'
 import { v4 } from 'uuid'
 import toast from 'react-hot-toast'
 
-interface TagEntity {
-  id: string
-  createdAt: string
-  updatedAt: string
-  name: string
-  color: string
-}
+import { Tag } from '@/types/tags'
 
 interface TagStore {
-  tags: Record<string, TagEntity>
-  getTag: (key: string) => TagEntity | undefined
+  tags: Record<string, Tag>
+  getTag: (key: string) => Tag | undefined
   deleteTag: (key: string) => void
   createTag: (name: string, color: string) => void
   editTag: (key: string, name: string) => void
@@ -36,7 +30,7 @@ export const useTagsStorage = create<TagStore>()(
         const id = v4()
         const timestamp = new Date().toISOString()
 
-        const newTag: TagEntity = {
+        const newTag: Tag = {
           id,
           createdAt: timestamp,
           updatedAt: timestamp,

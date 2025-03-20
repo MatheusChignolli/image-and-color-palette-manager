@@ -3,16 +3,11 @@ import { persist } from 'zustand/middleware'
 import { v4 } from 'uuid'
 import toast from 'react-hot-toast'
 
-interface GroupEntity {
-  id: string
-  createdAt: string
-  updatedAt: string
-  name: string
-}
+import { Group } from '@/types/groups'
 
 interface GroupStore {
-  groups: Record<string, GroupEntity>
-  getGroup: (key: string) => GroupEntity | undefined
+  groups: Record<string, Group>
+  getGroup: (key: string) => Group | undefined
   deleteGroup: (key: string) => void
   createGroup: (name: string) => void
   editGroup: (key: string, name: string) => void
@@ -35,7 +30,7 @@ export const useGroupsStorage = create<GroupStore>()(
         const id = v4()
         const timestamp = new Date().toISOString()
 
-        const newGroup: GroupEntity = {
+        const newGroup: Group = {
           id,
           createdAt: timestamp,
           updatedAt: timestamp,

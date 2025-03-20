@@ -4,21 +4,11 @@ import { v4 } from 'uuid'
 import toast from 'react-hot-toast'
 
 import { Comment } from '@/types/comments'
-
-interface ImageEntity {
-  id: string
-  createdAt: string
-  updatedAt: string
-  name: string
-  tags: string[]
-  groups: string[]
-  content: string
-  comments: Comment[]
-}
+import { Image } from '@/types/images'
 
 interface ImageStore {
-  images: Record<string, ImageEntity>
-  getImage: (key: string) => ImageEntity | undefined
+  images: Record<string, Image>
+  getImage: (key: string) => Image | undefined
   deleteImage: (key: string) => void
   createImage: (name: string, content: string, tags?: string[], groups?: string[]) => void
   editImage: (
@@ -51,7 +41,7 @@ export const useImagesStorage = create<ImageStore>()(
         const id = v4()
         const timestamp = new Date().toISOString()
 
-        const newImage: ImageEntity = {
+        const newImage: Image = {
           id,
           createdAt: timestamp,
           updatedAt: timestamp,
@@ -149,7 +139,7 @@ export const useImagesStorage = create<ImageStore>()(
               }
               return acc
             },
-            {} as Record<string, ImageEntity>
+            {} as Record<string, Image>
           )
 
           return { images: updatedImages }
@@ -168,7 +158,7 @@ export const useImagesStorage = create<ImageStore>()(
               }
               return acc
             },
-            {} as Record<string, ImageEntity>
+            {} as Record<string, Image>
           )
 
           return { images: updatedImages }
