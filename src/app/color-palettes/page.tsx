@@ -1,6 +1,7 @@
 import Filters from '@/components/filters'
 import { Entity } from '@/types/entities'
-// import Images from './_components/images'
+
+import ColorPalettes from './_components/color-palettes'
 
 export const metadata = {
   title: 'Color Palette Organizer - Smart Color Management',
@@ -12,7 +13,7 @@ function ImageModule() {
     <div className="flex flex-col gap-4">
       <h1 className="text-4xl font-semibold">Color palettes</h1>
       <Filters entity={Entity.COLOR_PALETTE} />
-      {/* <Images /> */}
+      <ColorPalettes />
     </div>
   )
 }

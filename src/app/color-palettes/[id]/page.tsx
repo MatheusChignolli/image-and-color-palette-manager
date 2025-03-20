@@ -1,7 +1,7 @@
-import ImageForm from '@/components/image-form'
 import CommentsModal from '@/components/comments-modal'
 // import DangerZone from '../_components/danger-zone'
 import { Entity } from '@/types/entities'
+import ColorPaletteForm from '@/components/color-palette-form'
 
 export const metadata = {
   title: 'Edit Color Palette - Color Manager',
@@ -22,7 +22,7 @@ async function ImagePage({ params }: Props) {
         <h1 className="text-3xl font-bold">Edit color palette</h1>
         <CommentsModal entity={Entity.IMAGE} id={id} />
       </div>
-      <ImageForm id={id} />
+      <ColorPaletteForm id={id} />
       {/* <DangerZone id={id} /> */}
     </div>
   )
