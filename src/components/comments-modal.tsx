@@ -1,12 +1,13 @@
 'use client'
 
 import { useImagesStorage } from '@/storage/images'
+import { Entity } from '@/types/entities'
 import { useForm } from '@tanstack/react-form'
 import { ArrowRight, MessageCircle, Trash2, X } from 'lucide-react'
 
 interface Props {
   id: string
-  entity: 'image' | 'colorPalette'
+  entity: Entity
 }
 
 const useColorPaletteStorage = () => {}
@@ -17,12 +18,12 @@ function CommentsModal({ id, entity }: Props) {
   const colorPaletteStorage = useColorPaletteStorage()
 
   const storageMapper = {
-    image: {
+    [Entity.IMAGE]: {
       addComment: imageStorage.addComment,
       deleteComment: imageStorage.deleteComment,
       getData: imageStorage.getImage
     },
-    colorPalette: {
+    [Entity.COLOR_PALETTE]: {
       addComment: colorPaletteStorage?.addComment,
       deleteComment: colorPaletteStorage?.deleteComment,
       getData: colorPaletteStorage?.getColorPalette

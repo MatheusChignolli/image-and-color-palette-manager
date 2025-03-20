@@ -3,7 +3,8 @@ const paths = {
   images: '/images',
   imageNew: '/images/new',
   image: (id: string) => `/images/${id}`,
-  colorPalette: '/color-palette'
+  colorPalettes: '/color-palettes',
+  colorPaletteNew: '/color-palettes/new'
 }
 
 export default paths

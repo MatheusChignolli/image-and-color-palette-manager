@@ -2,13 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { v4 } from 'uuid'
 import toast from 'react-hot-toast'
-
-interface Comment {
-  id: string
-  createdAt: string
-  updatedAt: string
-  content: string
-}
+import { Comment } from '@/types/comments'
 
 interface ImageEntity {
   id: string

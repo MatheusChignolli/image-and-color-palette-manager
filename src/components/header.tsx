@@ -46,7 +46,7 @@ function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm" href={paths.colorPalette} prefetch={false}>
+                  <Link className="text-sm" href={paths.colorPalettes} prefetch={false}>
                     Color palette
                   </Link>
                 </li>

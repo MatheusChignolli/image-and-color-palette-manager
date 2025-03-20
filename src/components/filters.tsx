@@ -8,8 +8,13 @@ import { useForm } from '@tanstack/react-form'
 import { Plus, Search } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { Entity } from '@/types/entities'
 
-function Filters() {
+interface Props {
+  entity: Entity
+}
+
+function Filters({ entity }: Props) {
   const searchParams = useSearchParams()
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
@@ -20,6 +25,19 @@ function Filters() {
   const query = searchParams.get('query')
   const tag = searchParams.get('tag')
   const group = searchParams.get('group')
+
+  const addEntityMapper = {
+    [Entity.IMAGE]: {
+      text: 'Add image',
+      path: paths.imageNew
+    },
+    [Entity.COLOR_PALETTE]: {
+      text: 'Add color palette',
+      path: paths.colorPaletteNew
+    }
+  }
+
+  const { text, path } = addEntityMapper[entity]
 
   const createQueryString = (values: { name: string; value: string }[]) => {
     if (!values.length) {
@@ -136,10 +154,10 @@ function Filters() {
           </>
         )}
       </button>
-      <Link href={paths.imageNew}>
+      <Link href={path}>
         <button type="button" className="btn btn-primary btn-md">
           <Plus size={20} />
-          Add image
+          {text}
         </button>
       </Link>
     </form>

@@ -7,6 +7,7 @@ import paths from '@/constants/paths'
 import { useGroupsStorage } from '@/storage/groups'
 import { useImagesStorage } from '@/storage/images'
 import { useTagsStorage } from '@/storage/tags'
+import { Entity } from '@/types/entities'
 import shareUtils from '@/utils/share'
 import { Clipboard, Share } from 'lucide-react'
 import Link from 'next/link'
@@ -58,7 +59,7 @@ function Images() {
       {imagesList.map(({ id, name, content, updatedAt, tags, groups }) => (
         <div key={id} className="relative">
           <div className="absolute top-2 left-2 z-10">
-            <CommentsModal entity="image" id={id} />
+            <CommentsModal entity={Entity.IMAGE} id={id} />
           </div>
           <div className="absolute top-2 right-2 z-10 flex gap-2">
             <button

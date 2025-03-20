@@ -1,5 +1,6 @@
 import Filters from '@/components/filters'
 import Images from './_components/images'
+import { Entity } from '@/types/entities'
 
 export const metadata = {
   title: 'Image Organizer - Smart Image Management',
@@ -10,7 +11,8 @@ export const metadata = {
 function ImageModule() {
   return (
     <div className="flex flex-col gap-4">
-      <Filters />
+      <h1 className="text-4xl font-semibold">Images</h1>
+      <Filters entity={Entity.IMAGE} />
       <Images />
     </div>
   )
