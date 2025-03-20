@@ -41,7 +41,7 @@ function ImageWithFallback({
         backgroundRepeat: 'no-repeat',
         objectFit: 'cover'
       }}
-      className="flex"
+      className="flex relative"
     >
       <Image
         {...props}

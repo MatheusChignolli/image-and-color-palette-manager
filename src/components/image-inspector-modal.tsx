@@ -15,17 +15,16 @@ function ImageInspectorModal({ className, src }: Props) {
 
   return (
     <>
-      <div className="tooltip" data-tip="Open image">
-        <button
-          type="button"
-          className={`btn btn-primary btn-square ${className}`}
-          onClick={() =>
-            (document.getElementById(modalId) as HTMLDialogElement)?.showModal()
-          }
-        >
-          <SquareArrowOutUpRight size={20} />
-        </button>
-      </div>
+      <button
+        type="button"
+        className={`btn btn-primary btn-square ${className} tooltip`}
+        data-tip="Open image"
+        onClick={() =>
+          (document.getElementById(modalId) as HTMLDialogElement)?.showModal()
+        }
+      >
+        <SquareArrowOutUpRight size={20} />
+      </button>
       <dialog id={modalId} className="modal">
         <div className="p-10 relative">
           <button

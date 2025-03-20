@@ -1,5 +1,6 @@
 'use client'
 
+import CommentsModal from '@/components/comments-modal'
 import ImageWithFallback from '@/components/image-with-fallback'
 import defaultValues from '@/constants/defaults'
 import paths from '@/constants/paths'
@@ -56,10 +57,13 @@ function Images() {
     <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {imagesList.map(({ id, name, content, updatedAt, tags, groups }) => (
         <div key={id} className="relative">
+          <div className="absolute top-2 left-2 z-10">
+            <CommentsModal entity="image" id={id} />
+          </div>
           <div className="absolute top-2 right-2 z-10 flex gap-2">
             <button
               onClick={() => shareUtils.shareUrl(content)}
-              className="btn btn-square btn-primary tooltip tooltip-primary"
+              className="btn btn-square btn-primary tooltip"
               data-tip="Share image URL"
             >
               <Share size={20} />
@@ -67,7 +71,7 @@ function Images() {
 
             <button
               onClick={() => shareUtils.copyToClipboard(content)}
-              className="btn btn-square btn-primary tooltip tooltip-primary"
+              className="btn btn-square btn-primary tooltip"
               data-tip="Copy image URL"
             >
               <Clipboard size={20} />
