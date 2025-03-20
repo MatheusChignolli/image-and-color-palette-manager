@@ -168,6 +168,7 @@ Para está aplicação foram utilizadas as seguintes tecnologias:
 - [React colorful](https://omgovich.github.io/react-colorful/): Seletor de cores, utilizado para o usuário selecionar as cores das paletas de cores.
 - [React Hot Toast](https://react-hot-toast.com/): Componente de notificações, foi escolhido pois é simples, amigável e o leve. Um ponto relevante: Em projeto maiores eu criar o próprio estilo de toast, utilizando a lógica dessa mesma lib, no caso desse projeto o estilo foi mantido pela simplicidade e por não gerar um grande valor em tal mudança.
 - [React hook form](https://tanstack.com/form/latest): Biblioteca para gerenciar o estado de um formulário. Ela foi utilizada por que recentemente foi lançada a v1, por ser simples, possuir uma implementação que não precisa de muito código e também por ser da [Tanstack](https://tanstack.com/), software open-source com diversas bibliotecas utilitárias para gerenciamento de funcionalidades básicas como o controle de um formulários, requisições e outros. Uma oportunidade para testar a nova biblioteca e entender se ela é boa ou não.
+- [Netlify](https://www.netlify.com/): Responsável por hospedar com uma limitação do plano gratuito boa para projetos menores e MVPs.
 
 #### Testes
 
