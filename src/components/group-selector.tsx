@@ -1,8 +1,9 @@
 'use client'
 
+import { Settings } from 'lucide-react'
+
 import limits from '@/constants/limits'
 import { useGroupsStorage } from '@/storage/groups'
-import { Settings } from 'lucide-react'
 
 interface Props {
   form: any

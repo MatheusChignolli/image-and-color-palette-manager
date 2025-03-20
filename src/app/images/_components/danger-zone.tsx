@@ -1,9 +1,10 @@
 'use client'
 
 import { useTransition } from 'react'
-import { useImagesStorage } from '@/storage/images'
 import { Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+
+import { useImagesStorage } from '@/storage/images'
 import paths from '@/constants/paths'
 
 const modalId = 'delete-image-modal'

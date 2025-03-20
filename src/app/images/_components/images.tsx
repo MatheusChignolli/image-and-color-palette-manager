@@ -1,5 +1,10 @@
 'use client'
 
+import { Clipboard, Share } from 'lucide-react'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+
 import CommentsModal from '@/components/comments-modal'
 import ImageWithFallback from '@/components/image-with-fallback'
 import defaultValues from '@/constants/defaults'
@@ -9,10 +14,6 @@ import { useImagesStorage } from '@/storage/images'
 import { useTagsStorage } from '@/storage/tags'
 import { Entity } from '@/types/entities'
 import shareUtils from '@/utils/share'
-import { Clipboard, Share } from 'lucide-react'
-import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
 
 function Images() {
   const searchParams = useSearchParams()

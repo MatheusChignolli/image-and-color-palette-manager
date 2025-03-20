@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { v4 } from 'uuid'
 import toast from 'react-hot-toast'
+
 import { Comment } from '@/types/comments'
 import { Color, ColorPalette } from '@/types/color-palettes'
 

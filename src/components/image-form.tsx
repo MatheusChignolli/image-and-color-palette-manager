@@ -2,6 +2,9 @@
 
 import { useTransition } from 'react'
 import { Ban, Plus, Save } from 'lucide-react'
+import { useForm } from '@tanstack/react-form'
+import { useRouter } from 'next/navigation'
+
 import FieldsetError from '@/app/_components/fieldset-error'
 import GroupSelector from '@/components/group-selector'
 import ImageInspectorModal from '@/components/image-inspector-modal'
@@ -9,8 +12,6 @@ import TagSelector from '@/components/tag-selector'
 import limits from '@/constants/limits'
 import paths from '@/constants/paths'
 import { useImagesStorage } from '@/storage/images'
-import { useForm } from '@tanstack/react-form'
-import { useRouter } from 'next/navigation'
 
 interface Props {
   id?: string

@@ -2,14 +2,15 @@
 
 import { useTransition } from 'react'
 import { Ban, Plus, Save } from 'lucide-react'
+import { useForm } from '@tanstack/react-form'
+import { useRouter } from 'next/navigation'
+
 import FieldsetError from '@/app/_components/fieldset-error'
 import GroupSelector from '@/components/group-selector'
 import TagSelector from '@/components/tag-selector'
 import ColorSelector from '@/components/color-selector'
 import limits from '@/constants/limits'
 import paths from '@/constants/paths'
-import { useForm } from '@tanstack/react-form'
-import { useRouter } from 'next/navigation'
 import { useColorPalettesStorage } from '@/storage/color-palettes'
 
 interface Props {

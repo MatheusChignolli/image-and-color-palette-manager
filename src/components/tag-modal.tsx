@@ -2,10 +2,12 @@
 
 import { useForm } from '@tanstack/react-form'
 import { ArrowUpRight, X } from 'lucide-react'
+
 import FieldsetError from '@/app/_components/fieldset-error'
 import limits from '@/constants/limits'
 import { useTagsStorage } from '@/storage/tags'
 import tagsUtils from '@/utils/tags'
+
 import TagListItem from './tag-list-item'
 
 function CreateTagModal() {

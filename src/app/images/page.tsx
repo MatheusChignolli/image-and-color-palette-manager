@@ -1,6 +1,7 @@
 import Filters from '@/components/filters'
-import Images from './_components/images'
 import { Entity } from '@/types/entities'
+
+import Images from './_components/images'
 
 export const metadata = {
   title: 'Image Organizer - Smart Image Management',

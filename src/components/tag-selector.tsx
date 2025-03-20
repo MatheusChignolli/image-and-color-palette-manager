@@ -1,9 +1,10 @@
 'use client'
 
+import { Settings } from 'lucide-react'
+
 import defaultValues from '@/constants/defaults'
 import limits from '@/constants/limits'
 import { useTagsStorage } from '@/storage/tags'
-import { Settings } from 'lucide-react'
 
 interface Props {
   form: any

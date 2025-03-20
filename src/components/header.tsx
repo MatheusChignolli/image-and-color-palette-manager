@@ -7,9 +7,11 @@
  *
  */
 
-import paths from '@/constants/paths'
 import { Box, Settings2 } from 'lucide-react'
 import Link from 'next/link'
+
+import paths from '@/constants/paths'
+
 import OpenModalButton from './open-modal-button'
 
 function Header() {

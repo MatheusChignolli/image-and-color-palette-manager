@@ -1,7 +1,8 @@
 import ImageForm from '@/components/image-form'
 import CommentsModal from '@/components/comments-modal'
-import DangerZone from '../_components/danger-zone'
 import { Entity } from '@/types/entities'
+
+import DangerZone from '../_components/danger-zone'
 
 export const metadata = {
   title: 'Edit Image - Image Manager',

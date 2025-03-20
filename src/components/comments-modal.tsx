@@ -1,10 +1,11 @@
 'use client'
 
+import { useForm } from '@tanstack/react-form'
+import { ArrowRight, MessageCircle, Trash2, X } from 'lucide-react'
+
 import { useColorPalettesStorage } from '@/storage/color-palettes'
 import { useImagesStorage } from '@/storage/images'
 import { Entity } from '@/types/entities'
-import { useForm } from '@tanstack/react-form'
-import { ArrowRight, MessageCircle, Trash2, X } from 'lucide-react'
 
 interface Props {
   id: string

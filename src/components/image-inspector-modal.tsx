@@ -1,6 +1,7 @@
 'use client'
 
 import { SquareArrowOutUpRight, X } from 'lucide-react'
+
 import ImageWithFallback from './image-with-fallback'
 
 interface Props {

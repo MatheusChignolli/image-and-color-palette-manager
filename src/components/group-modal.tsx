@@ -2,9 +2,11 @@
 
 import { useForm } from '@tanstack/react-form'
 import { ArrowUpRight, X } from 'lucide-react'
+
 import { useGroupsStorage } from '@/storage/groups'
 import FieldsetError from '@/app/_components/fieldset-error'
 import limits from '@/constants/limits'
+
 import GroupListItem from './group-list-item'
 
 function CreateGroupModal() {
