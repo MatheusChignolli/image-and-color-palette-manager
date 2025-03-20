@@ -36,32 +36,36 @@ function EntityCard({
   const { getGroup } = useGroupsStorage()
   const { getTag } = useTagsStorage()
 
-  const { href } = {
+  const { href, shareTooltipText, copyTooltipText } = {
     [Entity.IMAGE]: {
-      href: paths.image(id)
+      href: paths.image(id),
+      shareTooltipText: 'Share image URL',
+      copyTooltipText: 'Copy image URL'
     },
     [Entity.COLOR_PALETTE]: {
-      href: paths.colorPalette(id)
+      href: paths.colorPalette(id),
+      shareTooltipText: 'Share color palette',
+      copyTooltipText: 'Copy color palette'
     }
   }[entity]
 
   return (
     <div className="relative">
       <div className="absolute top-2 left-2 z-10">
-        <CommentsModal entity={Entity.IMAGE} id={id} />
+        <CommentsModal entity={entity} id={id} />
       </div>
       <div className="absolute top-2 right-2 z-10 flex gap-2">
         <button
           onClick={() => shareUtils.shareUrl(copyAndShareContent)}
           className="btn btn-square btn-primary tooltip"
-          data-tip="Share image URL"
+          data-tip={shareTooltipText}
         >
           <Share size={20} />
         </button>
         <button
           onClick={() => shareUtils.copyToClipboard(copyAndShareContent)}
           className="btn btn-square btn-primary tooltip"
-          data-tip="Copy image URL"
+          data-tip={copyTooltipText}
         >
           <Clipboard size={20} />
         </button>
