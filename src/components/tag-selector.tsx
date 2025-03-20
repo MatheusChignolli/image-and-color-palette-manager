@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { Settings } from 'lucide-react'
@@ -15,8 +16,8 @@ function TagSelector({ form }: Props) {
   const formTags = form.state.values.tags
   const tagsList = Object.values(tags).filter(tag => !formTags.includes(tag.id))
 
-  const handleTagChange = (e: any) => {
-    const id = (e.target as HTMLInputElement).value.trim()
+  const handleTagChange = (event: any) => {
+    const id = (event.target as HTMLInputElement).value.trim()
 
     if (!formTags.some((tag: string) => tag === id)) {
       if (formTags.length >= limits.MAX_TAGS) {
