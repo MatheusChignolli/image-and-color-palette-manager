@@ -15,8 +15,8 @@ function GroupSelector({ form }: Props) {
   const formGroups = form.state.values.groups
   const groupsList = Object.values(groups).filter(group => !formGroups.includes(group.id))
 
-  const handleGroupChange = (e: any) => {
-    const id = (e.target as HTMLInputElement).value.trim()
+  const handleGroupChange = (event: any) => {
+    const id = (event.target as HTMLInputElement).value.trim()
 
     if (!formGroups.some((group: string) => group === id)) {
       if (formGroups.length >= limits.MAX_GROUPS) {
@@ -27,7 +27,7 @@ function GroupSelector({ form }: Props) {
 
       form.setFieldValue('groups', updatedGroups)
     }
-    ;(e.target as HTMLInputElement).value = ''
+    ;(event.target as HTMLInputElement).value = ''
   }
 
   const handleRemoveGroup = (id: string) => {

@@ -28,7 +28,7 @@ function TagSelector({ form }: Props) {
 
       form.setFieldValue('tags', updatedTags)
     }
-    ;(e.target as HTMLInputElement).value = ''
+    ;(event.target as HTMLInputElement).value = ''
   }
 
   const handleRemoveTag = (id: string) => {
