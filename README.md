@@ -76,6 +76,8 @@ image
 
 - **Página genérica de error:** Responsável por mostrar uma mensagem amigável quando acontecer algum erro inesperado na aplicação.
 
+- **Página de loading:** Responsável por mostrar o estado de carregamento da aplicação.
+
 ### 3. Estratégia de Gerenciamento de Dados
 
 #### Persistência dos dados
@@ -197,3 +199,7 @@ Essa área será utilizada para justificar lógicas da aplicação em geral:
 - Uma ideia que não foi aplicada nessa versão é a implementação da internacionalização, organizando os textos utilizados na aplicação em arquivos de linguas diferentes, abrangendo mais usuários e também tornando a manutenção de tradução fácil.
 - Como evolução de uma aplicação com APIs também se dá como necessário um bom gerenciamento dos retornos das APIs, se fazendo necessário funções que padronizem erros e código retornados. Como por exemplo: Independente do erro, se for 404 ou 5xx, redirecionar o usuário para uma página específica com uma mensagem amigável ao invés de deixá-lo sem entender o por que de uma ação não ter feito nada no sistema.
 - Melhorias para serem adicionar em uma próxima versão são informação do Open Graph, melhorando o SEO do site.
+- Utilizando a página de loading como um bom exemplo de experiência por demonstrar ao usuário o estado da aplicação (O que algo está carregando) também foram adicionados em algumas ações o loading nos botões de submissão para evitar clique duplo e também exibir o que a ação que o usuário acabou de fazer está carregando. Pelo fato do armazenamento de dados utilizar o local storage então componentes de loading podem quase nem ser exibidos, por se tratar de um dado que é salvo no lado do _client_ e utilizado por ele mesmo mas em aplicações que possuem 1 ou mais requisições que possam demorar é importante existir algo visual que exemplifique essa demora e explique para o usuário o que está carregando, podendo ser um texto com efeitos simples, _Skeletons_, algo interativo ou até mesmo textos que mudam conforme o dado que está acontecendo do lado do serviço em tempo real.
+- Sobre experiência do usuário também é bastante importante ter alguma interação que explique o que são as coisas na aplicação, seja um Tour ou até mesmo vídeos demonstrativos, nessa primeira versão foram adicionados 2 vídeos sobre cada módulo mas de fato mais vídeos e demonstrações podem se fazer necessárias para que os usuários utilizem o sistema da melhor forma.
+- Com relação a segurança é muito importante que as aplicações Frontend possuam do lado do servidor _Request Headers_ que inibam ataques prejudiciais para a aplicação como XSS e outros. Nessa aplicação como o site esta hospedado na Netlify e utiliza um domínio da Netlify então tais prevenções ficam a cargo do terceiro.
+- Tomando o gancho do item anterior, para o MVP não temos um domínio amigável pois o time de marketing está decidindo e estudando um domínio bacana, para não retardar o lançamento foi utilizado um domínio temporário da Netlify.
