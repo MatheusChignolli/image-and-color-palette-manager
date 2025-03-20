@@ -50,7 +50,7 @@ function ColorSelector({ form, field }: ColorSelectorProps) {
   }
 
   const handleRemoveColor = (colorId: string) => {
-    const newColors = formColors.filter(c => c.id !== colorId)
+    const newColors = formColors.filter((color: Color) => color.id !== colorId)
     form.setFieldValue('colors', newColors)
     form.validateAllFields('submit')
   }
