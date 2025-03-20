@@ -3,23 +3,7 @@ import { persist } from 'zustand/middleware'
 import { v4 } from 'uuid'
 import toast from 'react-hot-toast'
 import { Comment } from '@/types/comments'
-
-interface Color {
-  id: string
-  name: string
-  hex: string
-}
-
-interface ColorPalette {
-  id: string
-  createdAt: string
-  updatedAt: string
-  name: string
-  colors: Color[]
-  tags: string[]
-  groups: string[]
-  comments: Comment[]
-}
+import { Color, ColorPalette } from '@/types/color-palettes'
 
 interface ColorPaletteStore {
   palettes: Record<string, ColorPalette>

@@ -1,5 +1,6 @@
 'use client'
 
+import { useColorPalettesStorage } from '@/storage/color-palettes'
 import { useImagesStorage } from '@/storage/images'
 import { Entity } from '@/types/entities'
 import { useForm } from '@tanstack/react-form'
@@ -10,12 +11,10 @@ interface Props {
   entity: Entity
 }
 
-const useColorPaletteStorage = () => {}
-
 function CommentsModal({ id, entity }: Props) {
   const commentsModalId = `comments-modal-${id}`
   const imageStorage = useImagesStorage()
-  const colorPaletteStorage = useColorPaletteStorage()
+  const colorPaletteStorage = useColorPalettesStorage()
 
   const storageMapper = {
     [Entity.IMAGE]: {
@@ -26,7 +25,7 @@ function CommentsModal({ id, entity }: Props) {
     [Entity.COLOR_PALETTE]: {
       addComment: colorPaletteStorage?.addComment,
       deleteComment: colorPaletteStorage?.deleteComment,
-      getData: colorPaletteStorage?.getColorPalette
+      getData: colorPaletteStorage?.getPalette
     }
   }
 

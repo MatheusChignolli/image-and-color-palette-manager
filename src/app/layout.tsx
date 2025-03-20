@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Brand Zone',
+  title: 'Brand Zone - Organize Your Colors and Images',
   description: 'Application to generate and manage content in a simple way'
 }
 
