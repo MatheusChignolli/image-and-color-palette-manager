@@ -3,7 +3,6 @@
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-import ImageWithFallback from '@/components/image-with-fallback'
 import { Entity } from '@/types/entities'
 import EntityCard from '@/components/list-card'
 import { useColorPalettesStorage } from '@/storage/color-palettes'
@@ -19,7 +18,10 @@ function ColorPalettes() {
 
   const imagesList = Object.values(palettes).filter(palette => {
     const matchesQuery = query
-      ? palette.name.toLowerCase().includes(query.toLowerCase())
+      ? palette.name.toLowerCase().includes(query.toLowerCase()) ||
+        palette.comments?.some(palette =>
+          palette.content.toLowerCase().includes(query.toLowerCase())
+        )
       : true
     const matchesGroup = group ? palette.groups?.includes(group) : true
     const matchesTag = tag ? palette.tags?.includes(tag) : true

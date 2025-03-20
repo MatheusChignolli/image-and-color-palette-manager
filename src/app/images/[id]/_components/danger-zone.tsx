@@ -22,7 +22,7 @@ function DangerZone({ id }: Props) {
     startTransition(() => {
       deleteImage(id)
       ;(document.getElementById(modalId) as HTMLDialogElement)?.close()
-      router.push(paths.images)
+      router.replace(paths.images)
     })
   }
 

@@ -18,8 +18,12 @@ function Images() {
   const tag = searchParams.get('tag')
 
   const imagesList = Object.values(images).filter(image => {
+    // image.comments
     const matchesQuery = query
-      ? image.name.toLowerCase().includes(query.toLowerCase())
+      ? image.name.toLowerCase().includes(query.toLowerCase()) ||
+        image.comments?.some(comment =>
+          comment.content.toLowerCase().includes(query.toLowerCase())
+        )
       : true
     const matchesGroup = group ? image.groups?.includes(group) : true
     const matchesTag = tag ? image.tags?.includes(tag) : true
