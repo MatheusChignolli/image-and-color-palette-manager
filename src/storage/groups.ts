@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { v4 } from 'uuid'
@@ -20,9 +21,8 @@ export const useGroupsStorage = create<GroupStore>()(
       getGroup: key => get().groups[key],
       deleteGroup: key => {
         set(state => {
-          const groups = state.groups
-          delete groups[key]
-          return { groups }
+          const { [key]: _, ...updatedGroups } = state.groups
+          return { groups: updatedGroups }
         })
         toast(`Group deleted`)
       },

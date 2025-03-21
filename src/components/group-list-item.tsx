@@ -10,8 +10,6 @@ import limits from '@/constants/limits'
 import { useImagesStorage } from '@/storage/images'
 import { useColorPalettesStorage } from '@/storage/color-palettes'
 
-const deleteGroupModalId = 'delete-group-modal'
-
 interface Props {
   id: string
   name: string
@@ -22,6 +20,8 @@ function GroupListItem({ id, name }: Props) {
   const { deleteGroup, editGroup } = useGroupsStorage()
   const { removeGroupFromImages } = useImagesStorage()
   const { removeGroupFromPalettes } = useColorPalettesStorage()
+
+  const deleteGroupModalId = `delete-group-modal-${id}`
 
   const handleDeleteGroup = () => {
     deleteGroup(id)

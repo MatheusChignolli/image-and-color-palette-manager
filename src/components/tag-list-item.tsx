@@ -10,8 +10,6 @@ import { useTagsStorage } from '@/storage/tags'
 import { useImagesStorage } from '@/storage/images'
 import { useColorPalettesStorage } from '@/storage/color-palettes'
 
-const deleteTagModalId = 'delete-tag-modal'
-
 interface Props {
   id: string
   name: string
@@ -23,6 +21,8 @@ function TagListItem({ id, name, color }: Props) {
   const { deleteTag, editTag } = useTagsStorage()
   const { removeTagFromImages } = useImagesStorage()
   const { removeTagFromPalettes } = useColorPalettesStorage()
+
+  const deleteTagModalId = `delete-tag-modal-${id}`
 
   const handleDeleteTag = () => {
     deleteTag(id)

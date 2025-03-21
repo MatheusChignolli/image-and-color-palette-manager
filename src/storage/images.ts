@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { v4 } from 'uuid'
@@ -31,9 +32,8 @@ export const useImagesStorage = create<ImageStore>()(
       getImage: key => get().images[key],
       deleteImage: key => {
         set(state => {
-          const images = { ...state.images }
-          delete images[key]
-          return { images }
+          const { [key]: _, ...updatedImages } = state.images
+          return { images: updatedImages }
         })
         toast(`Image deleted`)
       },
