@@ -1,9 +1,3 @@
-/* COMPONENT DESCRIPTION
- *
- * Landing page hero to tell what the application is in less words.
- *
- */
-
 function Hero() {
   return (
     <section className="hero min-h-[calc(100vh-64px)]">

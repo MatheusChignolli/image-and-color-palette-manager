@@ -7,10 +7,12 @@ import ImageWithFallback from '@/components/image-with-fallback'
 import { useImagesStorage } from '@/storage/images'
 import { Entity } from '@/types/entities'
 import EntityCard from '@/components/list-card'
+import { useTagsStorage } from '@/storage/tags'
 
 function Images() {
   const searchParams = useSearchParams()
   const { images } = useImagesStorage()
+  const { getTag } = useTagsStorage()
   const [isFetching, setIsFetching] = useState(true)
 
   const query = searchParams.get('query')
@@ -18,11 +20,13 @@ function Images() {
   const tag = searchParams.get('tag')
 
   const imagesList = Object.values(images).filter(image => {
-    // image.comments
     const matchesQuery = query
       ? image.name.toLowerCase().includes(query.toLowerCase()) ||
         image.comments?.some(comment =>
           comment.content.toLowerCase().includes(query.toLowerCase())
+        ) ||
+        image.tags?.some(tag =>
+          getTag(tag)?.name.toLowerCase().includes(query.toLowerCase())
         )
       : true
     const matchesGroup = group ? image.groups?.includes(group) : true

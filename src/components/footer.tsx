@@ -1,9 +1,3 @@
-/* COMPONENT DESCRIPTION
- *
- * Application footer with Copyright text.
- *
- */
-
 function Footer() {
   return (
     <footer className="footer footer-horizontal footer-center bg-base-300 text-primary-content p-10">

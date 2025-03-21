@@ -55,7 +55,6 @@ function Showcase() {
             className="w-[800px] h-auto object-cover rounded-xl shadow-xl"
           />
         </div>
-        {/* TODO: CREATE CTA TO COLOR PALLETTE */}
       </section>
     </>
   )

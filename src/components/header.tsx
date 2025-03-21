@@ -1,12 +1,3 @@
-/* COMPONENT DESCRIPTION
- *
- * Application header with some features:
- * - Navigation menu on left side with links to Image and Color Pallette modules.
- * - Logo with link to home page at middle.
- * - Search button to find data between Image and Color Pallette modules.
- *
- */
-
 import { Box, Settings2 } from 'lucide-react'
 import Link from 'next/link'
 

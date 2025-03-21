@@ -6,10 +6,12 @@ import { useEffect, useState } from 'react'
 import { Entity } from '@/types/entities'
 import EntityCard from '@/components/list-card'
 import { useColorPalettesStorage } from '@/storage/color-palettes'
+import { useTagsStorage } from '@/storage/tags'
 
 function ColorPalettes() {
   const searchParams = useSearchParams()
   const { palettes } = useColorPalettesStorage()
+  const { getTag } = useTagsStorage()
   const [isFetching, setIsFetching] = useState(true)
 
   const query = searchParams.get('query')
@@ -21,6 +23,9 @@ function ColorPalettes() {
       ? palette.name.toLowerCase().includes(query.toLowerCase()) ||
         palette.comments?.some(palette =>
           palette.content.toLowerCase().includes(query.toLowerCase())
+        ) ||
+        palette.tags?.some(tag =>
+          getTag(tag)?.name.toLowerCase().includes(query.toLowerCase())
         )
       : true
     const matchesGroup = group ? palette.groups?.includes(group) : true
