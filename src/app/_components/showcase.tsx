@@ -6,7 +6,7 @@ function Showcase() {
   return (
     <>
       <section className="grid grid-cols-2 px-10 py-20">
-        <div className="col-span-1 sm:col-span-2 md:col-span-1 flex flex-col justify-center h-full">
+        <div className="col-span-2 md:col-span-1 flex flex-col justify-center h-full">
           <h3 className="text-4xl font-bold">Smart Image Organization, Simplified</h3>
           <h4 className="text-2xl font-medium mt-1">
             Find, sort, and manage your images effortlessly.
@@ -20,7 +20,7 @@ function Showcase() {
             <button className="btn btn-primary">Start adding images</button>
           </Link>
         </div>
-        <div className="col-span-2 md:col-span-1">
+        <div className="col-span-2 sm:col-span-1 mt-10 sm:mt-0">
           <video
             src="/image-manager.mp4"
             autoPlay
@@ -31,7 +31,7 @@ function Showcase() {
         </div>
       </section>
       <section className="grid grid-cols-2 px-10 py-20">
-        <div className="col-span-2 md:col-span-1 flex flex-col justify-center h-full">
+        <div className="col-span-2 sm:col-span-1 flex flex-col justify-center h-full">
           <h3 className="text-4xl font-bold">Your Perfect Color Palette, Instantly</h3>
           <h4 className="text-2xl font-medium mt-1">
             Create, organize, and refine color schemes with ease.
@@ -46,7 +46,7 @@ function Showcase() {
             <button className="btn btn-primary">Start adding colors</button>
           </Link>
         </div>
-        <div className="col-span-2 md:col-span-1">
+        <div className="col-span-2 md:col-span-1 mt-10 sm:mt-0">
           <video
             src="/color-palette-manager.mp4"
             autoPlay
