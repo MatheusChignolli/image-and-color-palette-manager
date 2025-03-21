@@ -70,7 +70,7 @@ function EntityCard({
           <Clipboard size={20} />
         </button>
       </div>
-      <Link href={href} prefetch={false}>
+      <Link href={href}>
         <div className="card bg-base-200 w-full shadow-md relative h-full">
           {children}
           <div className="card-body">
