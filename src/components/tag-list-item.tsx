@@ -8,6 +8,7 @@ import FieldsetError from '@/app/_components/fieldset-error'
 import limits from '@/constants/limits'
 import { useTagsStorage } from '@/storage/tags'
 import { useImagesStorage } from '@/storage/images'
+import { useColorPalettesStorage } from '@/storage/color-palettes'
 
 const deleteTagModalId = 'delete-tag-modal'
 
@@ -21,10 +22,12 @@ function TagListItem({ id, name, color }: Props) {
   const [isEditing, setIsEditing] = useState(false)
   const { deleteTag, editTag } = useTagsStorage()
   const { removeTagFromImages } = useImagesStorage()
+  const { removeTagFromPalettes } = useColorPalettesStorage()
 
   const handleDeleteTag = () => {
     deleteTag(id)
     removeTagFromImages(id)
+    removeTagFromPalettes(id)
     ;(document.getElementById(deleteTagModalId) as HTMLDialogElement)?.close()
   }
 

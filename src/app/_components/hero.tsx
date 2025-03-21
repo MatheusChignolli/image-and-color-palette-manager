@@ -1,3 +1,7 @@
+import Link from 'next/link'
+
+import paths from '@/constants/paths'
+
 function Hero() {
   return (
     <section className="hero min-h-[calc(100vh-64px)]">
@@ -9,7 +13,9 @@ function Hero() {
             organizer. Stay focused, collaborate seamlessly, and never lose track of
             important information again.
           </p>
-          <button className="btn btn-primary">Get Started</button>
+          <Link href={paths.imageNew}>
+            <button className="btn btn-primary">Get Started</button>
+          </Link>
         </div>
       </div>
     </section>

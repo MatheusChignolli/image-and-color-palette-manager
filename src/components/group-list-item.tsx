@@ -8,6 +8,7 @@ import { useGroupsStorage } from '@/storage/groups'
 import FieldsetError from '@/app/_components/fieldset-error'
 import limits from '@/constants/limits'
 import { useImagesStorage } from '@/storage/images'
+import { useColorPalettesStorage } from '@/storage/color-palettes'
 
 const deleteGroupModalId = 'delete-group-modal'
 
@@ -20,10 +21,12 @@ function GroupListItem({ id, name }: Props) {
   const [isEditing, setIsEditing] = useState(false)
   const { deleteGroup, editGroup } = useGroupsStorage()
   const { removeGroupFromImages } = useImagesStorage()
+  const { removeGroupFromPalettes } = useColorPalettesStorage()
 
   const handleDeleteGroup = () => {
     deleteGroup(id)
     removeGroupFromImages(id)
+    removeGroupFromPalettes(id)
     ;(document.getElementById(deleteGroupModalId) as HTMLDialogElement)?.close()
   }
 
