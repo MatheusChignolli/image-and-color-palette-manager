@@ -42,6 +42,8 @@ O projeto está estruturado com [App Router](https://nextjs.org/docs/app) do Nex
 
 #### Fluxo dos componentes, páginas e dados
 
+Observação: A área branca é a aplicação inteira e a parte cinza no canto superior direito são os schemas dos dados persistidos no local storage.
+
 ![flow](https://github.com/user-attachments/assets/ededde19-cbef-4956-a54a-8b24180f64d0)
 
 ### 2. Componentes principais
