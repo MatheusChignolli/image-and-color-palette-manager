@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
-import { GoogleTagManager } from '@next/third-parties/google'
 
 import Header from '@/components/header'
 import Footer from '@/components/footer'
@@ -32,6 +32,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-5B4VQW42RF"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-5B4VQW42RF');
+          `
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
@@ -50,7 +68,6 @@ export default function RootLayout({
           }}
         />
       </body>
-      <GoogleTagManager gtmId="G-5B4VQW42RF" />
     </html>
   )
 }

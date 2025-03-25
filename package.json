@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/third-parties": "^15.2.3",
     "@tanstack/react-form": "^1.0.5",
     "daisyui": "^5.0.4",
     "idb": "^8.0.2",

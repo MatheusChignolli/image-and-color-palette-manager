@@ -177,7 +177,6 @@ Para esta aplicação foram utilizadas as seguintes tecnologias:
 - [Netlify](https://www.netlify.com/): Responsável por hospedar com uma limitação do plano gratuito boa para projetos menores e MVPs.
 - [ChatGPT](https://openai.com/index/chatgpt/): Utilizado para ajudar com componentes.
 - [Claude](https://claude.ai/login?returnTo=%2F%3F): Utilizado para revisar o README.
-- [@next/third-parties](https://www.npmjs.com/package/@next/third-parties): Utilizado para configurar o Google Analytics mas é possível configurar outros serviços de terceiros de forma simples.
 
 #### Testes
 
