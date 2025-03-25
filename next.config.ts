@@ -17,7 +17,13 @@ const nextConfig: NextConfig = {
           {
             key: 'Content-Security-Policy',
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src * data:; font-src 'self'; frame-ancestors 'self';"
+              "default-src 'self'; " +
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; " +
+              "style-src 'self' 'unsafe-inline'; " +
+              'img-src * data:; ' +
+              "font-src 'self'; " +
+              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; " +
+              "frame-ancestors 'self';"
           },
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
