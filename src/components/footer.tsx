@@ -3,7 +3,7 @@ function Footer() {
     <footer className="footer footer-horizontal footer-center bg-base-300 text-primary-content p-10">
       <aside>
         <p className="font-bold">
-          Brand Zone
+          Content Zone
           <br />
           Providing content facilities to help people
         </p>
