@@ -65,7 +65,7 @@ function Header() {
       </div>
       <div className="navbar-center">
         <Link href={paths.home} className="btn btn-ghost text-xl">
-          Brand Zone
+          Content Zone
         </Link>
       </div>
       <div className="navbar-end" />
